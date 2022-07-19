@@ -12,6 +12,8 @@ import makeWASocket, {
 import { toDataURL } from 'qrcode'
 import __dirname from './dirname.js'
 import response from './response.js'
+import { getMessages, responseMessages, requestApi } from './controller_data/flows.js'
+
 
 const sessions = new Map()
 const retries = new Map()
@@ -84,16 +86,29 @@ const createSession = async (sessionId, isLegacy = false, res = null) => {
     })
 
     wa.ev.on('messages.upsert', async (m) => {
-        const message = m.messages[0]
+        const msg = m.messages[0]
 
-        if (!message.key.fromMe && m.type === 'notify') {
-            await delay(1000)
-
-            if (isLegacy) {
-                await wa.chatRead(message.key, 1)
-            } else {
-                await wa.sendReadReceipt(message.key.remoteJid, message.key.participant, [message.key.id])
+        if (m.type === 'notify') {
+            console.log("mensaje recibido ---")
+            console.log(msg)
+            console.log("--- mensaje recibido")
+            if (!msg.key.fromMe && msg.message?.buttonsResponseMessage) {
+                console.log(msg.message.buttonsResponseMessage.selectedButtonId);
+                const response = await requestApi(msg.key.remoteJid, msg.message.buttonsResponseMessage.selectedButtonId);
+                await wa.sendMessage(msg.key.remoteJid, response.replyMessage);
+            } else if (!msg.key.fromMe && msg.message.conversation) {
+                const step = await getMessages(msg.message.conversation.toLowerCase());
+                if (step) {
+                    const response = await responseMessages(step, msg.message.conversation.toLowerCase());
+                    console.log(`response: ${response}`);
+                    await wa.sendMessage(msg.key.remoteJid, response.replyMessage);
+                }
+            } else if (!msg.key.fromMe && msg.message.listResponseMessage) {
+                console.log(msg.message.listResponseMessage.singleSelectReply.selectedRowId);
+                const response = await requestApi(msg.key.remoteJid, msg.message.listResponseMessage.singleSelectReply.selectedRowId);
+                await wa.sendMessage(msg.key.remoteJid, response.replyMessage);
             }
+
         }
     })
 

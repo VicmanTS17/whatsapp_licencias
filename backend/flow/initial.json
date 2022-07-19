@@ -1,0 +1,37 @@
+[
+    {
+        "keywords": [
+            "hola",
+            "hola!",
+            "ola",
+            "inicio",
+            "welcome",
+            "buenos días",
+            "buenas tardes",
+            "buenas noches",
+            "me dieron este número"
+        ],
+        "key": "STEP_1"
+    },
+    {
+        "keywords": [
+            "muchas gracias",
+            "ok",
+            "gracias",
+            "vale gracias",
+            "adios",
+            "adiós"
+        ],
+        "key": "STEP_4"
+    },
+    {
+        "keywords": [
+            "resibo",
+            "recivo",
+            "resivo",
+            "recibo",
+            "lectura"
+        ],
+        "key": "consulta"
+    }
+]

@@ -1,0 +1,103 @@
+{
+    "DEFAULT": {
+        "replyMessage": {
+            "text": "tamos trabajando"
+        }
+    },
+    "STEP_1": {
+        "replyMessage": {
+            "text": "Listado de opciones",
+            "footer": "jiapaz.gob.mx",
+            "title": "Bienvenido al chatbot de JIAPAZ.\nMi nombres es *Jiapy*, mi objetivo es atenderte mejor y de manera más ágil. Confía en mí y ayúdame a mejorar.\n",
+            "buttonText": "Seleciona una de las opciones:",
+            "sections": [
+                {
+                    "title": "Opciones",
+                    "rows": [
+                        {
+                            "title": "Registrar mi Inmueble con este Celular",
+                            "rowId": "1"
+                        },
+                        {
+                            "title": "Consultar cuándo me toca el agua ",
+                            "rowId": "2"
+                        },
+                        {
+                            "title": "Generar un reporte",
+                            "rowId": "3"
+                        },
+                        {
+                            "title": "Consultar mi saldo o consumo",
+                            "rowId": "4"
+                        },
+                        {
+                            "title": "Requisitos para contratos y otros trámites",
+                            "rowId": "5"
+                        },
+                        {
+                            "title": "Tips para cuidar el agua",
+                            "rowId": "6"
+                        },
+                        {
+                            "title": "Otro/Hablar con un operador",
+                            "rowId": "7"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "STEP_1_1": {
+        "replyMessage": {
+            "image": {
+                "url": "https://jiapaz-pagos.gob.mx/pagos_jiapaz/assets/img/recibo_ejemplo.png"
+            },
+            "caption": "Ya tienes inmuebles registrados ¿Que quieres hacer?",
+            "footer": "jiapaz.gob.mx",
+            "buttons": [
+                {
+                    "buttonId": "1-1-1",
+                    "buttonText": {
+                        "displayText": "Ver mis inmuebles"
+                    },
+                    "type": 1
+                },
+                {
+                    "buttonId": "1-1-0",
+                    "buttonText": {
+                        "displayText": "Registrar Nuevo inmueble"
+                    },
+                    "type": 1
+                }
+            ],
+            "headerType": 4
+        }
+    },
+    "STEP_1_1_0": {
+        "replyMessage": {
+            "text": "Registro de inmuebles",
+            "footer": "jiapaz.gob.mx",
+            "templateButtons": [
+                {
+                    "index": 1,
+                    "urlButton": {
+                        "displayText": "Registrar desde la página",
+                        "url": "https://jiapaz-pagos.gob.mx/pagos_jiapaz/"
+                    }
+                },
+                {
+                    "index": 2,
+                    "urlButton": {
+                        "displayText": "Registrar desde 'mi JIAPAZ'",
+                        "url": "https://play.google.com/store/apps/details?id=com.itecnologia.iscal.jiapaz"
+                    }
+                }
+            ]
+        }
+    },
+    "STEP_MESSAGE": {
+        "replyMessage": {
+            "text": "oh hello there"
+        }
+    }
+}
