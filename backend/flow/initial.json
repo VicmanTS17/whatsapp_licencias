@@ -11,7 +11,7 @@
             "buenas noches",
             "me dieron este número"
         ],
-        "key": "STEP_1"
+        "key": "STEP_1_1"
     },
     {
         "keywords": [
@@ -22,7 +22,7 @@
             "adios",
             "adiós"
         ],
-        "key": "STEP_4"
+        "key": "DEFAULT"
     },
     {
         "keywords": [

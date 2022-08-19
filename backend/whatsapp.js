@@ -97,12 +97,23 @@ const createSession = async (sessionId, isLegacy = false, res = null) => {
                 const response = await requestApi(msg.key.remoteJid, msg.message.buttonsResponseMessage.selectedButtonId);
                 await wa.sendMessage(msg.key.remoteJid, response.replyMessage);
             } else if (!msg.key.fromMe && msg.message.conversation) {
-                const step = await getMessages(msg.message.conversation.toLowerCase());
+
+                await wa.sendMessage(msg.key.remoteJid, { text: 'oh hello there' })
+                await wa.sendMessage(
+                    msg.key.remoteJid,
+                    { location: { degreesLatitude: 24.121231, degreesLongitude: 55.1121221 } }
+                )
+                await wa.sendMessage(msg.key.remoteJid, {
+                    image: {
+                        "url": "https://jiapaz-pagos.gob.mx/pagos_jiapaz/assets/img/recibo_ejemplo.png"
+                    }
+                })
+                /*const step = await getMessages(msg.message.conversation.toLowerCase());
                 if (step) {
                     const response = await responseMessages(step, msg.message.conversation.toLowerCase());
                     console.log(`response: ${response}`);
                     await wa.sendMessage(msg.key.remoteJid, response.replyMessage);
-                }
+                }*/
             } else if (!msg.key.fromMe && msg.message.listResponseMessage) {
                 console.log(msg.message.listResponseMessage.singleSelectReply.selectedRowId);
                 const response = await requestApi(msg.key.remoteJid, msg.message.listResponseMessage.singleSelectReply.selectedRowId);
