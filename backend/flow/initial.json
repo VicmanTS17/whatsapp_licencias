@@ -11,27 +11,32 @@
             "buenas noches",
             "me dieron este número"
         ],
-        "key": "STEP_1_1"
+        "key": "STEP_1"
     },
     {
         "keywords": [
-            "muchas gracias",
-            "ok",
-            "gracias",
-            "vale gracias",
-            "adios",
-            "adiós"
+            "1"
         ],
-        "key": "DEFAULT"
+        "key": "REGISTRO"
     },
     {
         "keywords": [
-            "resibo",
-            "recivo",
-            "resivo",
-            "recibo",
-            "lectura"
+            "2",
+            "3",
+            "4"
         ],
-        "key": "consulta"
+        "key": "CONSULTA"
+    },
+    {
+        "keywords": [
+            "5"
+        ],
+        "key": "REQUISITOS"
+    },
+    {
+        "keywords": [
+            "6"
+        ],
+        "key": "OPERADOR"
     }
 ]

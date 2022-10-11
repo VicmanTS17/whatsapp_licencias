@@ -89,35 +89,110 @@ const createSession = async (sessionId, isLegacy = false, res = null) => {
         const msg = m.messages[0]
 
         if (m.type === 'notify') {
+            /*await wa.sendMessage(msg.key.remoteJid, {
+                image: { url: 'https://jiapaz-pagos.gob.mx/pagos_jiapaz/assets/img/recibo_ejemplo.png' }
+            })*/
             console.log("mensaje recibido ---")
             console.log(msg)
             console.log("--- mensaje recibido")
-            if (!msg.key.fromMe && msg.message?.buttonsResponseMessage) {
-                console.log(msg.message.buttonsResponseMessage.selectedButtonId);
-                const response = await requestApi(msg.key.remoteJid, msg.message.buttonsResponseMessage.selectedButtonId);
-                await wa.sendMessage(msg.key.remoteJid, response.replyMessage);
-            } else if (!msg.key.fromMe && msg.message.conversation) {
-
-                await wa.sendMessage(msg.key.remoteJid, { text: 'oh hello there' })
-                await wa.sendMessage(
-                    msg.key.remoteJid,
-                    { location: { degreesLatitude: 24.121231, degreesLongitude: 55.1121221 } }
-                )
-                await wa.sendMessage(msg.key.remoteJid, {
-                    image: {
-                        "url": "https://jiapaz-pagos.gob.mx/pagos_jiapaz/assets/img/recibo_ejemplo.png"
+            if (!msg.key.fromMe && msg.message.conversation) {
+                const mensaje = msg.message.conversation.toLowerCase();
+                const telefono = msg.key.remoteJid;
+                const step = await getMessages(mensaje);
+                console.log(step);
+                if (mensaje == '51' || mensaje == '52' || mensaje == '53' || mensaje == '54' || mensaje == '55' || mensaje == '56') {
+                    const response = await requestApi(telefono, mensaje, 'requisitos');
+                    console.log(response);
+                    await wa.sendMessage(telefono, response.replyMessage);
+                } else if (step == 'CONSULTA') {
+                    const response = await requestApi(telefono, mensaje);
+                    console.log(response);
+                    console.log(response.length);
+                    if (response.length >= 1) {
+                        if (mensaje === "3") {
+                            await wa.sendMessage(telefono, { "text": "Reenvíanos una de estas opciones para consultar cuando te toca el 💧💧 Agua 💧💧" });
+                        } else if (mensaje === "4") {
+                            await wa.sendMessage(telefono, { "text": "Reenvíanos una de estas opciones para consultar el 💲💲 Saldo 💲💲" });
+                        }
+                        response.map(async (inmueble) => {
+                            console.log(inmueble.ALIAS);
+                            let mensaje_cont = "";
+                            if (mensaje === "2") {
+                                mensaje_cont = `Inmueble ${inmueble.ALIAS}`
+                            } else if (mensaje === "3") {
+                                mensaje_cont = `Tandeo :${inmueble.ALIAS}`
+                            } else if (mensaje === "4") {
+                                mensaje_cont = `Saldo :${inmueble.ALIAS}`
+                            }
+                            await wa.sendMessage(telefono, { text: mensaje_cont });
+                        });
+                    } else {
+                        await wa.sendMessage(telefono, response.replyMessage);
                     }
-                })
-                /*const step = await getMessages(msg.message.conversation.toLowerCase());
-                if (step) {
-                    const response = await responseMessages(step, msg.message.conversation.toLowerCase());
-                    console.log(`response: ${response}`);
-                    await wa.sendMessage(msg.key.remoteJid, response.replyMessage);
-                }*/
-            } else if (!msg.key.fromMe && msg.message.listResponseMessage) {
-                console.log(msg.message.listResponseMessage.singleSelectReply.selectedRowId);
-                const response = await requestApi(msg.key.remoteJid, msg.message.listResponseMessage.singleSelectReply.selectedRowId);
-                await wa.sendMessage(msg.key.remoteJid, response.replyMessage);
+                } else if (step == 'TANDEO') {
+                    //await wa.sendMessage(telefono, { text: 'consultaremos el tandeo' });
+                    const response = await requestApi(telefono, mensaje, 'tandeo');
+                    console.log(response);
+                    await wa.sendMessage(telefono, response.replyMessage);
+                } else if (step == 'SALDO') {
+                    //await wa.sendMessage(telefono, { text: 'consultaremos el saldo' });
+                    const response = await requestApi(telefono, mensaje, 'saldo');
+                    console.log(response);
+                    await wa.sendMessage(telefono, response.replyMessage);
+                } else if (step) {
+                    const response = await responseMessages(step, mensaje);
+                    console.log(response);
+                    await wa.sendMessage(telefono, response.replyMessage);
+                } else {
+                    await wa.sendMessage(telefono, { text: 'No se encontro esa opción' });
+                }
+            } else if (!msg.key.fromMe && msg.message.extendedTextMessage) {
+                const mensaje = msg.message.extendedTextMessage.text.toLowerCase();
+                const telefono = msg.key.remoteJid;
+                const step = await getMessages(mensaje);
+                console.log(step);
+                if (step == 'CONSULTA') {
+                    const response = await requestApi(telefono, mensaje);
+                    console.log(response);
+                    console.log(response.length);
+                    if (response.length >= 1) {
+                        if (mensaje === "3") {
+                            await wa.sendMessage(telefono, { "text": "Reenvíanos una de estas opciones para consultar cuando te toca el 💧💧 Agua 💧💧" });
+                        } else if (mensaje === "4") {
+                            await wa.sendMessage(telefono, { "text": "Reenvíanos una de estas opciones para consultar el 💲💲 Saldo 💲💲" });
+                        }
+                        response.map(async (inmueble) => {
+                            console.log(inmueble.ALIAS);
+                            let mensaje_cont = "";
+                            if (mensaje === "2") {
+                                mensaje_cont = `Inmueble ${inmueble.ALIAS}`
+                            } else if (mensaje === "3") {
+                                mensaje_cont = `Tandeo :${inmueble.ALIAS}`
+                            } else if (mensaje === "4") {
+                                mensaje_cont = `Saldo :${inmueble.ALIAS}`
+                            }
+                            await wa.sendMessage(telefono, { text: mensaje_cont });
+                        });
+                    } else {
+                        await wa.sendMessage(telefono, response.replyMessage);
+                    }
+                } else if (step == 'TANDEO') {
+                    //await wa.sendMessage(telefono, { text: 'consultaremos el tandeo' });
+                    const response = await requestApi(telefono, mensaje, 'tandeo');
+                    console.log(response);
+                    await wa.sendMessage(telefono, response.replyMessage);
+                } else if (step == 'SALDO') {
+                    //await wa.sendMessage(telefono, { text: 'consultaremos el saldo' });
+                    const response = await requestApi(telefono, mensaje, 'saldo');
+                    console.log(response);
+                    await wa.sendMessage(telefono, response.replyMessage);
+                } else if (step) {
+                    const response = await responseMessages(step, mensaje);
+                    console.log(response);
+                    await wa.sendMessage(telefono, response.replyMessage);
+                } else {
+                    await wa.sendMessage(telefono, { text: 'No se encontro esa opción' });
+                }
             }
 
         }

@@ -1,50 +1,20 @@
 {
     "DEFAULT": {
         "replyMessage": {
-            "text": "tamos trabajando"
+            "text": "Estamos trabajando en estas opciones"
         }
     },
     "STEP_1": {
         "replyMessage": {
-            "text": "Listado de opciones",
-            "footer": "jiapaz.gob.mx",
-            "title": "Bienvenido al chatbot de JIAPAZ.\nMi nombres es *Jiapy*, mi objetivo es atenderte mejor y de manera más ágil. Confía en mí y ayúdame a mejorar.\n",
-            "buttonText": "Seleciona una de las opciones:",
-            "sections": [
-                {
-                    "title": "Opciones",
-                    "rows": [
-                        {
-                            "title": "Registrar mi Inmueble con este Celular",
-                            "rowId": "1"
-                        },
-                        {
-                            "title": "Consultar cuándo me toca el agua ",
-                            "rowId": "2"
-                        },
-                        {
-                            "title": "Generar un reporte",
-                            "rowId": "3"
-                        },
-                        {
-                            "title": "Consultar mi saldo o consumo",
-                            "rowId": "4"
-                        },
-                        {
-                            "title": "Requisitos para contratos y otros trámites",
-                            "rowId": "5"
-                        },
-                        {
-                            "title": "Tips para cuidar el agua",
-                            "rowId": "6"
-                        },
-                        {
-                            "title": "Otro/Hablar con un operador",
-                            "rowId": "7"
-                        }
-                    ]
-                }
-            ]
+            "image": {
+                "url": "https://jiapaz-pagos.gob.mx/pagos_jiapaz/assets/img/recibo_ejemplo.png"
+            },
+            "text": "Bienvenido al chatbot de JIAPAZ.\nMi nombres es *Jiapy*, mi objetivo es atenderte mejor y de manera más ágil. Confía en mí y ayúdame a mejorar.\n\nAnota *1* para Registrar Un Inmueble.\nAnota *2* para Consultar tus Inmuebles registrados.\nAnota *3* para Consultar cuándo me toca el agua.\nAnota *4* para Consultar mi saldo o consumo.\nAnota *5* Requisitos para contratos y otros trámites.\nAnota *6* Continuar con un operador"
+        }
+    },
+    "REGISTRO": {
+        "replyMessage": {
+            "text": "Para registrar un inmueble deberas ingresarlos desde las siguientes opciones:\nDesde la App *Mi JIAPAZ*: https://play.google.com/store/apps/details?id=com.itecnologia.iscal.jiapaz\nDesde la página de pagos: https://jiapaz-pagos.gob.mx/pagos_jiapaz\n\nPara ingresar deberas estar registrado previamente desde alguna de esta opciones."
         }
     },
     "STEP_1_1": {
@@ -98,6 +68,16 @@
     "STEP_MESSAGE": {
         "replyMessage": {
             "text": "oh hello there"
+        }
+    },
+    "REQUISITOS": {
+        "replyMessage": {
+            "text": "51 Contrato.\n52 Cambio de nombre.\n53 Factibilidad\n54 Cancelación temporal\n55 Reactivación del servicio tras baja temporal\n56 Constancia de no adeudo"
+        }
+    },
+    "OPERADOR": {
+        "replyMessage": {
+            "text": "51 Contrato.\n52 Cambio de nombre.\n53 Factibilidad\n54 Cancelación temporal\n55 Reactivación del servicio tras baja temporal\n56 Constancia de no adeudo"
         }
     }
 }
