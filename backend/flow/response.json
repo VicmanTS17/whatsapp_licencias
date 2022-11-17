@@ -9,7 +9,7 @@
             "image": {
                 "url": "https://jiapaz-pagos.gob.mx/pagos_jiapaz/assets/img/recibo_ejemplo.png"
             },
-            "text": "Bienvenido al chatbot de JIAPAZ.\nMi nombres es *Jiapy*, mi objetivo es atenderte mejor y de manera más ágil. Confía en mí y ayúdame a mejorar.\n\nAnota *1* para Registrar Un Inmueble.\nAnota *2* para Consultar tus Inmuebles registrados.\nAnota *3* para Consultar cuándo me toca el agua.\nAnota *4* para Consultar mi saldo o consumo.\nAnota *5* Requisitos para contratos y otros trámites.\nAnota *6* Continuar con un operador"
+            "text": "Bienvenido al chatbot de JIAPAZ.\nMi nombres es *Jiapy*, mi objetivo es atenderte mejor y de manera más ágil. Confía en mí y ayúdame a mejorar.\n\nAnota *1* para Registrar Un Inmueble.\nAnota *2* para Consultar tus Inmuebles registrados.\nAnota *3* para Consultar cuándo me toca el agua.\nAnota *4* para Consultar mi saldo o consumo.\nAnota *5* Requisitos para contratos y otros trámites.\nAnota *6* Continuar con un operador\n\nEn caso de no contar con inmuebles registrados *Anotar* el inmueble y la derivada de la siguiente manera:\n*info inmueble,derivada*\nejemp.: \n*info 1000,1000*"
         }
     },
     "REGISTRO": {

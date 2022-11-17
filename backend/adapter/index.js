@@ -31,7 +31,7 @@ const reply = async (step) => {
 const request = async (telefono, opcion = "", ruta = 'inmuebles') => {
     let message = stepsReponse["DEFAULT"] || {};
     try {
-        const response = await axios.post(`http://201.144.50.38/APIRestJIAPAZ/public/bot/${ruta}`,
+        const response = await axios.post(`http://10.45.224.34/APIRestJIAPAZ/public/bot/${ruta}`,
             { telefono: telefono, opcion: opcion })
         console.log(typeof (response.data));
         console.log(response.data)

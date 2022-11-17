@@ -100,10 +100,40 @@ const createSession = async (sessionId, isLegacy = false, res = null) => {
                 const telefono = msg.key.remoteJid;
                 const step = await getMessages(mensaje);
                 console.log(step);
-                if (mensaje == '51' || mensaje == '52' || mensaje == '53' || mensaje == '54' || mensaje == '55' || mensaje == '56') {
+                if (mensaje == '51' || mensaje == '52' || mensaje == '54' || mensaje == '55' || mensaje == '56') {
                     const response = await requestApi(telefono, mensaje, 'requisitos');
                     console.log(response);
                     await wa.sendMessage(telefono, response.replyMessage);
+                } else if (mensaje == '53') {
+                    const response = await requestApi(telefono, mensaje, 'requisitos');
+                    console.log(response);
+                    await wa.sendMessage(telefono, response.replyMessage);
+                    await wa.sendMessage(
+                        telefono,
+                        { document: { url: "https://firebasestorage.googleapis.com/v0/b/jiapaz.appspot.com/o/FORMATO-SOLICITUD-DE-FACTIBILIDAD.xlsx%20(4).docx?alt=media&token=1178f22f-a3bd-4c59-a9fb-d79a253c3df7" }, mimetype: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" },
+                        { url: "https://firebasestorage.googleapis.com/v0/b/jiapaz.appspot.com/o/FORMATO-SOLICITUD-DE-FACTIBILIDAD.xlsx%20(4).docx?alt=media&token=1178f22f-a3bd-4c59-a9fb-d79a253c3df7" })
+                } else if (mensaje.includes('info')) {
+                    const datos = mensaje.split(' ');
+                    const response = await requestApi(telefono, datos[1], 'info');
+                    console.log(response);
+                    await wa.sendMessage(telefono, response.replyMessage);
+                } else if (mensaje === '6') {
+                    const vcard = 'BEGIN:VCARD\n' // metadata of the contact card
+                        + 'VERSION:3.0\n'
+                        + 'FN:Operador Jiapaz\n' // full name
+                        + 'ORG:JIAPAZ;\n' // the organization of the contact
+                        + 'TEL;type=CELL;type=VOICE;waid=5214921030659:+52 1492 103 06 59\n' // WhatsApp ID + phone number
+                        + 'END:VCARD'
+                    await wa.sendMessage(
+                        telefono,
+                        {
+                            contacts: {
+                                displayName: 'Operador Jiapaz',
+                                contacts: [{ vcard }]
+                            }
+                        }
+                    )
+
                 } else if (step == 'CONSULTA') {
                     const response = await requestApi(telefono, mensaje);
                     console.log(response);
